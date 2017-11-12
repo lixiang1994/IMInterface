@@ -72,7 +72,7 @@ extension APIError {
         case internalServerError
         case phoneVerificationInvalid
         case reachedFriendLimit
-        // Mixin
+        // 
         case invalidInvitationCode
         case invalidVerificationCode
         // Unhandled

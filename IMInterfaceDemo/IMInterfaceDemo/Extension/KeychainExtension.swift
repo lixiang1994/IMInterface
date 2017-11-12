@@ -4,7 +4,7 @@ import KeychainAccess
 extension Keychain {
 
     class func getDeviceId() -> String {
-        let keychain = Keychain(service: "one.mixin.ios.notifications")
+        let keychain = Keychain(service: "lee.im.ios.notifications")
         var device_id = keychain["device_id"] ?? ""
         if device_id.isEmpty {
             device_id = UUID().uuidString

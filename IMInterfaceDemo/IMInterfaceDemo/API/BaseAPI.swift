@@ -63,7 +63,7 @@ class BaseAPI {
     private static let baseHeaders: HTTPHeaders = [
         "Content-Type": "application/json"
     ]
-    private static let rootURL = "https://api.mixin.zone/"
+    private static let rootURL = "https://"
     private static let jsonEncoding = JSONEncoding()
     
     private struct ResponseObject<ResultType: Codable>: Codable {
