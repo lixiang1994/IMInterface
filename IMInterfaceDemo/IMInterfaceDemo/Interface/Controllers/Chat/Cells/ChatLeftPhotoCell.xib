@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="186" id="ZVt-cz-aFh" customClass="ChatPhotoCell" customModule="Mixin" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="424" height="186"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ZVt-cz-aFh" id="Um8-yq-iH4">
+                <rect key="frame" x="0.0" y="0.0" width="424" height="185.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9kI-EK-5eb">
+                        <rect key="frame" x="8" y="10" width="217" height="175.5"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_chat_bubble_left" highlightedImage="ic_chat_bubble_left_tail" translatesAutoresizingMaskIntoConstraints="NO" id="gNZ-Jt-Fu6">
+                                <rect key="frame" x="0.0" y="0.0" width="217" height="175.5"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="L6j-qz-NOn" customClass="FLAnimatedImageView">
+                                <rect key="frame" x="12" y="3" width="200" height="167.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" priority="750" constant="200" id="bAH-5K-Ecm"/>
+                                    <constraint firstAttribute="height" priority="750" constant="200" id="bio-9V-V8t"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12:22 PM" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5ni-nz-XYI">
+                                <rect key="frame" x="132" y="154.5" width="76" height="14"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="76" id="1A8-1W-Yhf"/>
+                                    <constraint firstAttribute="height" constant="14" id="cAH-rz-rxm"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="L6j-qz-NOn" firstAttribute="trailing" secondItem="gNZ-Jt-Fu6" secondAttribute="trailing" constant="-5" id="6YC-7X-J7X"/>
+                            <constraint firstItem="5ni-nz-XYI" firstAttribute="trailing" secondItem="L6j-qz-NOn" secondAttribute="trailing" constant="-4" id="Hdd-kQ-0Ke"/>
+                            <constraint firstItem="5ni-nz-XYI" firstAttribute="bottom" secondItem="L6j-qz-NOn" secondAttribute="bottom" constant="-2" id="IIi-5B-uln"/>
+                            <constraint firstAttribute="trailing" secondItem="gNZ-Jt-Fu6" secondAttribute="trailing" id="JUK-su-N0D"/>
+                            <constraint firstItem="L6j-qz-NOn" firstAttribute="bottom" secondItem="gNZ-Jt-Fu6" secondAttribute="bottom" constant="-5" id="JZ2-8L-Uzm"/>
+                            <constraint firstItem="gNZ-Jt-Fu6" firstAttribute="top" secondItem="9kI-EK-5eb" secondAttribute="top" id="ab3-9P-HvV"/>
+                            <constraint firstItem="L6j-qz-NOn" firstAttribute="top" secondItem="gNZ-Jt-Fu6" secondAttribute="top" constant="3" id="cB0-3h-1Ld"/>
+                            <constraint firstAttribute="bottom" secondItem="gNZ-Jt-Fu6" secondAttribute="bottom" id="ehp-QH-whc"/>
+                            <constraint firstItem="L6j-qz-NOn" firstAttribute="leading" secondItem="gNZ-Jt-Fu6" secondAttribute="leading" constant="12" id="gX7-55-nVh"/>
+                            <constraint firstItem="gNZ-Jt-Fu6" firstAttribute="leading" secondItem="9kI-EK-5eb" secondAttribute="leading" id="tCb-28-hjY"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="9kI-EK-5eb" firstAttribute="leading" secondItem="Um8-yq-iH4" secondAttribute="leading" constant="8" id="4Ot-aH-mdf"/>
+                    <constraint firstItem="9kI-EK-5eb" firstAttribute="top" secondItem="Um8-yq-iH4" secondAttribute="top" constant="10" id="WrY-KZ-qiQ"/>
+                    <constraint firstAttribute="bottom" secondItem="9kI-EK-5eb" secondAttribute="bottom" id="uNu-u5-ys7"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="bubbleImageView" destination="gNZ-Jt-Fu6" id="1gE-RP-CE7"/>
+                <outlet property="containerView" destination="9kI-EK-5eb" id="rPg-ug-heh"/>
+                <outlet property="photoHeightConstraint" destination="bio-9V-V8t" id="LpC-Da-SYT"/>
+                <outlet property="photoImageView" destination="L6j-qz-NOn" id="eeY-KC-eqa"/>
+                <outlet property="photoWidthConstraint" destination="bAH-5K-Ecm" id="bp1-YW-qCy"/>
+                <outlet property="spacingConstraint" destination="WrY-KZ-qiQ" id="t4X-iW-YI0"/>
+                <outlet property="timeLabel" destination="5ni-nz-XYI" id="JsB-bH-MXE"/>
+            </connections>
+            <point key="canvasLocation" x="77" y="143"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="ic_chat_bubble_left" width="33" height="30"/>
+        <image name="ic_chat_bubble_left_tail" width="33" height="35"/>
+    </resources>
+</document>

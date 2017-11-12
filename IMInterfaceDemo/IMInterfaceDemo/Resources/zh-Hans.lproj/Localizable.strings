@@ -1,0 +1,21 @@
+// Common
+"dialog_button_ok" = "好的";
+"dialog_button_yes" = "确认";
+"dialog_button_cancel" = "取消";
+"dialog_button_save" = "保存";
+"dialog_button_change" = "改变";
+"dialog_button_confirm" = "确认";
+"dialog_progress_connect" = "连接中...";
+
+// Chat
+"chat_message_menu_copy" = "复制";
+"chat_message_menu_forward" = "转发";
+"chat_message_menu_delete" = "删除";
+"chat_action_title_camera" = "相机";
+"chat_action_title_album" = "相册";
+"chat_time_today" = "今天";
+
+// QRCode
+"qrcode_title" = "扫描二维码";
+"qrcode_open_camera_prompt_title" = "XXXX 无法使用您的相机";
+"qrcode_open_camera_prompt_description" = "请前往您的手机设置. \n隐私 -> 相机 \n打开开关.";

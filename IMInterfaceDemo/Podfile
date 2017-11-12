@@ -1,0 +1,17 @@
+platform :ios, '9.0'
+source 'https://github.com/CocoaPods/Specs.git'
+
+target 'IMInterfaceDemo' do
+  use_frameworks!
+  inhibit_all_warnings!
+
+  pod 'Alamofire'
+  #https://github.com/ccgus/fmdb/issues/591
+  pod 'FMDB/SQLCipher'
+  pod 'SnapKit', '~> 4.0.0'
+  pod 'KeychainAccess'
+  pod 'GDPerformanceView-Swift'
+  pod 'PINRemoteImage'
+  pod 'TZImagePickerController'
+  
+end

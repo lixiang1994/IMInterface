@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Chat View Controller-->
+        <scene sceneID="Hlh-XP-G8H">
+            <objects>
+                <viewController storyboardIdentifier="chat" id="kTC-K4-67P" customClass="ChatViewController" customModule="IMInterfaceDemo" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5YQ-Om-N2v">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_chat_bg" translatesAutoresizingMaskIntoConstraints="NO" id="z7J-cG-ANs">
+                                <rect key="frame" x="0.0" y="20" width="375" height="599"/>
+                            </imageView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" bouncesZoom="NO" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="30" estimatedSectionHeaderHeight="30" sectionFooterHeight="10" estimatedSectionFooterHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="c7e-Up-Xs9">
+                                <rect key="frame" x="0.0" y="20" width="375" height="598"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="prefetchDataSource" destination="kTC-K4-67P" id="KbW-aK-y97"/>
+                                </connections>
+                            </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VFW-66-6a4">
+                                <rect key="frame" x="0.0" y="618" width="375" height="49"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XsF-hQ-Zld">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="1"/>
+                                        <color key="backgroundColor" red="0.81176470588235294" green="0.81176470588235294" blue="0.81176470588235294" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="1" id="4bG-UC-GjM" customClass="LayoutConstraintHairline" customModule="IMInterfaceDemo" customModuleProvider="target"/>
+                                        </constraints>
+                                    </view>
+                                    <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lnf-a1-Sse">
+                                        <rect key="frame" x="0.0" y="0.0" width="49" height="49"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="49" id="1om-3L-xUC"/>
+                                            <constraint firstAttribute="width" constant="49" id="DJW-Ob-jCZ"/>
+                                        </constraints>
+                                        <state key="normal" image="ic_chat_transfer"/>
+                                        <connections>
+                                            <action selector="transferAction:" destination="kTC-K4-67P" eventType="touchUpInside" id="gEg-yA-18a"/>
+                                        </connections>
+                                    </button>
+                                    <button hidden="YES" opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dvy-YB-0Z9">
+                                        <rect key="frame" x="326" y="0.0" width="49" height="49"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="49" id="3ac-LD-inK"/>
+                                            <constraint firstAttribute="width" constant="49" id="xdH-bE-6wX"/>
+                                        </constraints>
+                                        <state key="normal" image="ic_chat_send"/>
+                                        <connections>
+                                            <action selector="sendAction:" destination="kTC-K4-67P" eventType="touchUpInside" id="zFF-CG-AL7"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uzZ-gV-A1A">
+                                        <rect key="frame" x="326" y="0.0" width="49" height="49"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="49" id="jPo-b1-ONk"/>
+                                            <constraint firstAttribute="width" constant="49" id="ppO-2B-AFU"/>
+                                        </constraints>
+                                        <state key="normal" image="ic_chat_photo"/>
+                                        <connections>
+                                            <action selector="photoAction:" destination="kTC-K4-67P" eventType="touchUpInside" id="V4A-PL-guL"/>
+                                        </connections>
+                                    </button>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="pX2-kb-Ns5" customClass="MessageTextView" customModule="IMInterfaceDemo" customModuleProvider="target">
+                                        <rect key="frame" x="49" y="7.5" width="277" height="34"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="34" id="gMb-FY-UFQ"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="kTC-K4-67P" id="RJR-bR-3Ns"/>
+                                        </connections>
+                                    </textView>
+                                </subviews>
+                                <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="uzZ-gV-A1A" secondAttribute="trailing" id="8oc-QW-huh"/>
+                                    <constraint firstAttribute="bottom" secondItem="uzZ-gV-A1A" secondAttribute="bottom" id="IiG-2s-LRX"/>
+                                    <constraint firstAttribute="bottom" secondItem="pX2-kb-Ns5" secondAttribute="bottom" constant="7.5" id="JTk-bs-SGQ"/>
+                                    <constraint firstItem="XsF-hQ-Zld" firstAttribute="leading" secondItem="VFW-66-6a4" secondAttribute="leading" id="MXD-yC-ztQ"/>
+                                    <constraint firstItem="uzZ-gV-A1A" firstAttribute="leading" secondItem="pX2-kb-Ns5" secondAttribute="trailing" id="YzE-Xn-jrz"/>
+                                    <constraint firstItem="pX2-kb-Ns5" firstAttribute="leading" secondItem="Lnf-a1-Sse" secondAttribute="trailing" id="d96-xo-89j"/>
+                                    <constraint firstAttribute="trailing" secondItem="Dvy-YB-0Z9" secondAttribute="trailing" id="e06-fR-qxO"/>
+                                    <constraint firstItem="Lnf-a1-Sse" firstAttribute="leading" secondItem="VFW-66-6a4" secondAttribute="leading" id="eKA-f9-8Jg"/>
+                                    <constraint firstAttribute="height" constant="49" id="gSn-dP-Ez2"/>
+                                    <constraint firstAttribute="bottom" secondItem="Dvy-YB-0Z9" secondAttribute="bottom" id="i3y-o8-Vz3"/>
+                                    <constraint firstItem="XsF-hQ-Zld" firstAttribute="top" secondItem="VFW-66-6a4" secondAttribute="top" id="oEN-7n-MQF"/>
+                                    <constraint firstAttribute="bottom" secondItem="Lnf-a1-Sse" secondAttribute="bottom" id="ovH-aS-mv4"/>
+                                    <constraint firstAttribute="trailing" secondItem="XsF-hQ-Zld" secondAttribute="trailing" id="pLr-4g-TB6"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="c7e-Up-Xs9" firstAttribute="trailing" secondItem="Caq-vK-wvV" secondAttribute="trailing" id="0cI-IP-1aG"/>
+                            <constraint firstItem="VFW-66-6a4" firstAttribute="trailing" secondItem="Caq-vK-wvV" secondAttribute="trailing" id="Akz-9g-XDP"/>
+                            <constraint firstItem="Caq-vK-wvV" firstAttribute="bottom" secondItem="z7J-cG-ANs" secondAttribute="bottom" constant="48" id="ETo-2X-w8o"/>
+                            <constraint firstItem="Caq-vK-wvV" firstAttribute="trailing" secondItem="z7J-cG-ANs" secondAttribute="trailing" id="PcR-o5-0gR"/>
+                            <constraint firstItem="c7e-Up-Xs9" firstAttribute="leading" secondItem="Caq-vK-wvV" secondAttribute="leading" id="UK2-hs-6Ha"/>
+                            <constraint firstItem="VFW-66-6a4" firstAttribute="top" secondItem="c7e-Up-Xs9" secondAttribute="bottom" id="Xbv-UX-har"/>
+                            <constraint firstItem="VFW-66-6a4" firstAttribute="leading" secondItem="Caq-vK-wvV" secondAttribute="leading" id="bdi-6z-AAW"/>
+                            <constraint firstItem="VFW-66-6a4" firstAttribute="bottom" secondItem="Caq-vK-wvV" secondAttribute="bottom" id="efU-hP-TTX"/>
+                            <constraint firstItem="z7J-cG-ANs" firstAttribute="top" secondItem="Caq-vK-wvV" secondAttribute="top" id="lot-OY-i2m"/>
+                            <constraint firstItem="z7J-cG-ANs" firstAttribute="leading" secondItem="Caq-vK-wvV" secondAttribute="leading" id="ls1-1r-f9I"/>
+                            <constraint firstItem="c7e-Up-Xs9" firstAttribute="top" secondItem="Caq-vK-wvV" secondAttribute="top" id="rb9-HI-Tqy"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Caq-vK-wvV"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="XeN-Nk-72b"/>
+                    <connections>
+                        <outlet property="bottomConstraint" destination="efU-hP-TTX" id="1nv-JE-I7f"/>
+                        <outlet property="heightConstraint" destination="gSn-dP-Ez2" id="Dsm-ev-puB"/>
+                        <outlet property="leftButton" destination="Lnf-a1-Sse" id="HLG-mB-xa9"/>
+                        <outlet property="rightButton" destination="uzZ-gV-A1A" id="rIm-5z-hVV"/>
+                        <outlet property="sendButton" destination="Dvy-YB-0Z9" id="J0L-Hx-6Rp"/>
+                        <outlet property="tableView" destination="c7e-Up-Xs9" id="CIA-ID-6Sm"/>
+                        <outlet property="textView" destination="pX2-kb-Ns5" id="bsb-Jz-bxq"/>
+                        <outlet property="textViewHeightConstraint" destination="gMb-FY-UFQ" id="7Ce-O8-1ax"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="j48-tu-uTf" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="837.60000000000002" y="13.943028485757123"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="ic_chat_bg" width="414" height="736"/>
+        <image name="ic_chat_photo" width="44" height="44"/>
+        <image name="ic_chat_send" width="44" height="44"/>
+        <image name="ic_chat_transfer" width="44" height="44"/>
+    </resources>
+</document>

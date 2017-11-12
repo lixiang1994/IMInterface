@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="193" id="XMV-sk-LOR" customClass="ChatPhotoCell" customModule="Mixin" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="410" height="193"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="XMV-sk-LOR" id="Ipx-qh-Ix3">
+                <rect key="frame" x="0.0" y="0.0" width="410" height="192.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZWm-gB-1Rh">
+                        <rect key="frame" x="185" y="10" width="217" height="182.5"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_chat_bubble_right" highlightedImage="ic_chat_bubble_right_tail" translatesAutoresizingMaskIntoConstraints="NO" id="SLx-9Z-Q6F">
+                                <rect key="frame" x="0.0" y="0.0" width="217" height="182.5"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="j9t-6Y-ZPr" customClass="FLAnimatedImageView">
+                                <rect key="frame" x="5" y="3" width="200" height="174.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" priority="750" constant="200" id="Lch-WY-vSR"/>
+                                    <constraint firstAttribute="height" priority="750" constant="200" id="vL0-bQ-OQ7"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12:22 PM" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TIh-3M-Jcp">
+                                <rect key="frame" x="125" y="161.5" width="76" height="14"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="14" id="erP-v3-r4C"/>
+                                    <constraint firstAttribute="width" constant="76" id="fvf-E3-Z1v"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="j9t-6Y-ZPr" firstAttribute="trailing" secondItem="SLx-9Z-Q6F" secondAttribute="trailing" constant="-12" id="3jY-0k-a7m"/>
+                            <constraint firstItem="j9t-6Y-ZPr" firstAttribute="top" secondItem="SLx-9Z-Q6F" secondAttribute="top" constant="3" id="8iP-S1-382"/>
+                            <constraint firstItem="j9t-6Y-ZPr" firstAttribute="leading" secondItem="SLx-9Z-Q6F" secondAttribute="leading" constant="5" id="9c5-C0-fKe"/>
+                            <constraint firstAttribute="bottom" secondItem="SLx-9Z-Q6F" secondAttribute="bottom" id="CG7-Xg-5fA"/>
+                            <constraint firstItem="j9t-6Y-ZPr" firstAttribute="bottom" secondItem="SLx-9Z-Q6F" secondAttribute="bottom" constant="-5" id="HRN-cX-sKA"/>
+                            <constraint firstItem="SLx-9Z-Q6F" firstAttribute="top" secondItem="ZWm-gB-1Rh" secondAttribute="top" id="Ukq-4c-L0o"/>
+                            <constraint firstItem="TIh-3M-Jcp" firstAttribute="bottom" secondItem="j9t-6Y-ZPr" secondAttribute="bottom" constant="-2" id="d3B-lj-wjO"/>
+                            <constraint firstAttribute="trailing" secondItem="SLx-9Z-Q6F" secondAttribute="trailing" id="h6S-ig-ebI"/>
+                            <constraint firstItem="SLx-9Z-Q6F" firstAttribute="leading" secondItem="ZWm-gB-1Rh" secondAttribute="leading" id="mj4-mI-OTd"/>
+                            <constraint firstItem="TIh-3M-Jcp" firstAttribute="trailing" secondItem="j9t-6Y-ZPr" secondAttribute="trailing" constant="-4" id="ueS-oc-IWq"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="ZWm-gB-1Rh" firstAttribute="top" secondItem="Ipx-qh-Ix3" secondAttribute="top" constant="10" id="1kJ-e4-HhC"/>
+                    <constraint firstAttribute="trailing" secondItem="ZWm-gB-1Rh" secondAttribute="trailing" constant="8" id="4nw-SM-h2P"/>
+                    <constraint firstAttribute="bottom" secondItem="ZWm-gB-1Rh" secondAttribute="bottom" id="Kt6-Kz-Gyx"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="bubbleImageView" destination="SLx-9Z-Q6F" id="TNr-BM-Ozy"/>
+                <outlet property="containerView" destination="ZWm-gB-1Rh" id="Xia-07-vUb"/>
+                <outlet property="photoHeightConstraint" destination="vL0-bQ-OQ7" id="WHJ-5O-phS"/>
+                <outlet property="photoImageView" destination="j9t-6Y-ZPr" id="3ZE-CU-rsm"/>
+                <outlet property="photoWidthConstraint" destination="Lch-WY-vSR" id="6em-tl-5aK"/>
+                <outlet property="spacingConstraint" destination="1kJ-e4-HhC" id="nUh-4E-6Pe"/>
+                <outlet property="timeLabel" destination="TIh-3M-Jcp" id="eAT-jp-8ca"/>
+            </connections>
+            <point key="canvasLocation" x="70" y="146.5"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="ic_chat_bubble_right" width="31" height="29"/>
+        <image name="ic_chat_bubble_right_tail" width="32" height="33"/>
+    </resources>
+</document>

@@ -1,0 +1,21 @@
+// Common
+"dialog_button_ok" = "OK";
+"dialog_button_yes" = "Yes";
+"dialog_button_cancel" = "Cancel";
+"dialog_button_save" = "Save";
+"dialog_button_change" = "Change";
+"dialog_button_confirm" = "Confirm";
+"dialog_progress_connect" = "Connecting...";
+
+// Chat
+"chat_message_menu_copy" = "Copy";
+"chat_message_menu_forward" = "Forward";
+"chat_message_menu_delete" = "Delete";
+"chat_action_title_camera" = "Camera";
+"chat_action_title_album" = "Album";
+"chat_time_today" = "Today";
+
+// QRCode
+"qrcode_title" = "Scan QR Code";
+"qrcode_open_camera_prompt_title" = "XXXX does not have access to your Camera";
+"qrcode_open_camera_prompt_description" = "Please go to your iPhone Settings. \nPrivacy -> Camera \nThen select ON for XXXX.";

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="129" id="bHZ-db-TMR" customClass="ChatTextCell" customModule="Mixin" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="408" height="129"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="bHZ-db-TMR" id="HFq-mO-ydt">
+                <rect key="frame" x="0.0" y="0.0" width="408" height="128.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="45i-DH-qGs">
+                        <rect key="frame" x="8" y="10" width="178" height="118.5"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_chat_bubble_left" highlightedImage="ic_chat_bubble_left_tail" translatesAutoresizingMaskIntoConstraints="NO" id="Zst-3J-PAh">
+                                <rect key="frame" x="0.0" y="0.0" width="178" height="118.5"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="this is new message" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7kV-C8-6jr" customClass="MessageLabel" customModule="Mixin" customModuleProvider="target">
+                                <rect key="frame" x="19" y="8" width="146" height="101.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12:22 PM" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IQn-bx-3Tg">
+                                <rect key="frame" x="89" y="95.5" width="76" height="14"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="76" id="1hA-3T-q5o"/>
+                                    <constraint firstAttribute="height" constant="14" id="ePO-hH-FdE"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="IQn-bx-3Tg" firstAttribute="bottom" secondItem="7kV-C8-6jr" secondAttribute="bottom" id="5da-Ih-lIW"/>
+                            <constraint firstItem="7kV-C8-6jr" firstAttribute="bottom" secondItem="Zst-3J-PAh" secondAttribute="bottom" constant="-9" id="6fa-K1-2Cd"/>
+                            <constraint firstItem="7kV-C8-6jr" firstAttribute="top" secondItem="Zst-3J-PAh" secondAttribute="top" constant="8" id="7tz-Dt-V82"/>
+                            <constraint firstAttribute="bottom" secondItem="Zst-3J-PAh" secondAttribute="bottom" id="F7m-wM-KdQ"/>
+                            <constraint firstItem="7kV-C8-6jr" firstAttribute="leading" secondItem="Zst-3J-PAh" secondAttribute="leading" constant="19" id="IS6-De-qkg"/>
+                            <constraint firstAttribute="trailing" secondItem="Zst-3J-PAh" secondAttribute="trailing" id="cGa-uK-GMv"/>
+                            <constraint firstItem="Zst-3J-PAh" firstAttribute="leading" secondItem="45i-DH-qGs" secondAttribute="leading" id="hwI-Vw-gdQ"/>
+                            <constraint firstItem="IQn-bx-3Tg" firstAttribute="trailing" secondItem="7kV-C8-6jr" secondAttribute="trailing" id="nYj-yu-B67"/>
+                            <constraint firstItem="Zst-3J-PAh" firstAttribute="top" secondItem="45i-DH-qGs" secondAttribute="top" id="pTt-ke-Jz7"/>
+                            <constraint firstItem="7kV-C8-6jr" firstAttribute="trailing" secondItem="Zst-3J-PAh" secondAttribute="trailing" constant="-13" id="qI1-dp-Htu"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="bottom" secondItem="45i-DH-qGs" secondAttribute="bottom" id="CYy-eM-UGM"/>
+                    <constraint firstItem="45i-DH-qGs" firstAttribute="leading" secondItem="HFq-mO-ydt" secondAttribute="leading" constant="8" id="U8P-pS-Eel"/>
+                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="45i-DH-qGs" secondAttribute="trailing" constant="30" id="cNm-8a-vc0"/>
+                    <constraint firstItem="45i-DH-qGs" firstAttribute="top" secondItem="HFq-mO-ydt" secondAttribute="top" constant="10" id="q9i-kh-KqZ"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="bubbleImageView" destination="Zst-3J-PAh" id="UA3-0a-ARg"/>
+                <outlet property="containerView" destination="45i-DH-qGs" id="x6f-jZ-Isi"/>
+                <outlet property="contentLabel" destination="7kV-C8-6jr" id="ho6-7F-zva"/>
+                <outlet property="spacingConstraint" destination="q9i-kh-KqZ" id="nHu-mE-ItM"/>
+                <outlet property="timeLabel" destination="IQn-bx-3Tg" id="rhw-Hg-br9"/>
+            </connections>
+            <point key="canvasLocation" x="-73" y="115.5"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="ic_chat_bubble_left" width="33" height="30"/>
+        <image name="ic_chat_bubble_left_tail" width="33" height="35"/>
+    </resources>
+</document>
