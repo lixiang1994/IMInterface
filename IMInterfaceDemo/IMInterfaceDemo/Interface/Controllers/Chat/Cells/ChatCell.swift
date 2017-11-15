@@ -1,5 +1,5 @@
 import UIKit
-
+import SnapKit
 protocol ChatCellDelegate: class {
     func longPressMenu(cell: ChatCell, item: MessageItem, rect: CGRect)
 }

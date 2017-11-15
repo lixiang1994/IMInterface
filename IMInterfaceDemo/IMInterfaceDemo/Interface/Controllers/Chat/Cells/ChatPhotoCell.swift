@@ -49,11 +49,11 @@ class ChatPhotoCell: ChatCell {
         if item.mediaMineType == "gif" {
             photoImageView.layer.cornerRadius = 6.0
             photoImageView.layer.masksToBounds = true
-            photoImageView.pin_setImage(from: URL(string: item.mediaUrl), placeholderImage: #imageLiteral(resourceName: "ic_place_holder"))
+            photoImageView.pin_setImage(from: URL(string: item.mediaUrl), placeholderImage: #imageLiteral(resourceName: "ic_photo_place_holder"))
         } else {
             photoImageView.layer.cornerRadius = 0.0
             photoImageView.layer.masksToBounds = false
-            photoImageView.pin_setImage(from: URL(string: item.mediaUrl), placeholderImage: #imageLiteral(resourceName: "ic_place_holder"), processorKey: "message") { (result, unsafePointer) -> UIImage? in
+            photoImageView.pin_setImage(from: URL(string: item.mediaUrl), placeholderImage: #imageLiteral(resourceName: "ic_photo_place_holder"), processorKey: "message") { (result, unsafePointer) -> UIImage? in
                 guard let image = result.image else {
                     return result.image
                 }

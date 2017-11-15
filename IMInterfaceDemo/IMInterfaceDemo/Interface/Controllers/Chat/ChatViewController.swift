@@ -427,9 +427,9 @@ extension ChatViewController : UIImagePickerControllerDelegate, UINavigationCont
         }
         
         DispatchQueue.global().async {
-            let path = NSTemporaryDirectory()
-            let url = URL(fileURLWithPath: "\(path)\(conversationId)_photorandom_id_\(image.hashValue)")
-            try? data.write(to: url)
+            let url = URL(fileURLWithPath: "\(conversationId)_photorandom_id_\(image.hashValue)")
+            let key = PINRemoteImageManager.shared().cacheKey(for: url, processorKey: nil)
+            PINRemoteImageManager.shared().cache.setObject(image, forKey: key)
             
             var message = MessageItem(messageId: UUID().uuidString, conversationId: conversationId, content: "photo")
             message.userId = account.id
@@ -454,9 +454,9 @@ extension ChatViewController : UIImagePickerControllerDelegate, UINavigationCont
         }
         
         DispatchQueue.global().async {
-            let path = NSTemporaryDirectory()
-            let url = URL(fileURLWithPath: "\(path)\(conversationId)_photorandom_id_\(data.hashValue)")
-            try? data.write(to: url)
+            let url = URL(fileURLWithPath: "\(conversationId)_photorandom_id_\(data.hashValue)")
+            let key = PINRemoteImageManager.shared().cacheKey(for: url, processorKey: nil)
+            PINRemoteImageManager.shared().cache.setObject(NSData(data: data), forKey: key)
             
             var message = MessageItem(messageId: UUID().uuidString, conversationId: conversationId, content: "photo")
             message.userId = account.id
