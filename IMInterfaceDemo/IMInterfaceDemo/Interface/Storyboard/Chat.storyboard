@@ -45,7 +45,7 @@
                                             <constraint firstAttribute="height" constant="49" id="1om-3L-xUC"/>
                                             <constraint firstAttribute="width" constant="49" id="DJW-Ob-jCZ"/>
                                         </constraints>
-                                        <state key="normal" image="ic_chat_transfer"/>
+                                        <state key="normal" image="ic_chat_more"/>
                                         <connections>
                                             <action selector="transferAction:" destination="kTC-K4-67P" eventType="touchUpInside" id="gEg-yA-18a"/>
                                         </connections>
@@ -146,8 +146,8 @@
     </scenes>
     <resources>
         <image name="ic_chat_bg" width="414" height="736"/>
+        <image name="ic_chat_more" width="44" height="44"/>
         <image name="ic_chat_photo" width="44" height="44"/>
         <image name="ic_chat_send" width="44" height="44"/>
-        <image name="ic_chat_transfer" width="44" height="44"/>
     </resources>
 </document>
