@@ -31,7 +31,7 @@ class ChatPhotoCell: ChatCell {
             return
         }
         
-        let photoBrowser = PhotoBrowserView()
+        let photoBrowser = PhotoBrowserView.init(frame: CGRect.zero)
         photoBrowser.delegate = self
         photoBrowser.show(imageUrl: imageUrl, size: CGSize(width: item.mediaWidth, height: item.mediaHeight))
     }
@@ -111,7 +111,6 @@ class ChatPhotoCell: ChatCell {
         spacingConstraint.constant = result ? 0.0 : 10.0
         layoutIfNeeded()
     }
-    
 }
 
 extension ChatPhotoCell: PhotoBrowserDelegate {

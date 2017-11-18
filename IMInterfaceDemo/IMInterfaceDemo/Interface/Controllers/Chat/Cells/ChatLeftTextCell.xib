@@ -11,7 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="129" id="bHZ-db-TMR" customClass="ChatTextCell" customModule="Mixin" customModuleProvider="target">
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="129" id="bHZ-db-TMR" customClass="ChatTextCell" customModule="IMInterfaceDemo" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="408" height="129"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="bHZ-db-TMR" id="HFq-mO-ydt">
@@ -24,11 +24,20 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_chat_bubble_left" highlightedImage="ic_chat_bubble_left_tail" translatesAutoresizingMaskIntoConstraints="NO" id="Zst-3J-PAh">
                                 <rect key="frame" x="0.0" y="0.0" width="178" height="118.5"/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="this is new message" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7kV-C8-6jr" customClass="MessageLabel" customModule="Mixin" customModuleProvider="target">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="this is new message" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7kV-C8-6jr" customClass="MessageLabel" customModule="IMInterfaceDemo" customModuleProvider="target">
                                 <rect key="frame" x="19" y="8" width="146" height="101.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" priority="750" constant="146" id="YqP-8g-mcR"/>
+                                    <constraint firstAttribute="height" priority="750" constant="101.5" id="oeb-sI-Gg2"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="fontSize_">
+                                        <real key="value" value="16"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12:22 PM" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IQn-bx-3Tg">
                                 <rect key="frame" x="89" y="95.5" width="76" height="14"/>
@@ -57,16 +66,18 @@
                     </view>
                 </subviews>
                 <constraints>
+                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="45i-DH-qGs" secondAttribute="trailing" priority="750" constant="15" id="2Kb-ou-DEE"/>
                     <constraint firstAttribute="bottom" secondItem="45i-DH-qGs" secondAttribute="bottom" id="CYy-eM-UGM"/>
                     <constraint firstItem="45i-DH-qGs" firstAttribute="leading" secondItem="HFq-mO-ydt" secondAttribute="leading" constant="8" id="U8P-pS-Eel"/>
-                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="45i-DH-qGs" secondAttribute="trailing" constant="30" id="cNm-8a-vc0"/>
                     <constraint firstItem="45i-DH-qGs" firstAttribute="top" secondItem="HFq-mO-ydt" secondAttribute="top" constant="10" id="q9i-kh-KqZ"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="bubbleImageView" destination="Zst-3J-PAh" id="UA3-0a-ARg"/>
                 <outlet property="containerView" destination="45i-DH-qGs" id="x6f-jZ-Isi"/>
+                <outlet property="contentHeightConstraint" destination="oeb-sI-Gg2" id="rzh-zI-ZcD"/>
                 <outlet property="contentLabel" destination="7kV-C8-6jr" id="ho6-7F-zva"/>
+                <outlet property="contentWidthConstraint" destination="YqP-8g-mcR" id="iqK-RM-gFt"/>
                 <outlet property="spacingConstraint" destination="q9i-kh-KqZ" id="nHu-mE-ItM"/>
                 <outlet property="timeLabel" destination="IQn-bx-3Tg" id="rhw-Hg-br9"/>
             </connections>

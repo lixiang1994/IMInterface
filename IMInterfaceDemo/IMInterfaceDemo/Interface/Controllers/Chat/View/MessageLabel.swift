@@ -1,23 +1,22 @@
 import UIKit
+import YYText
 
 protocol MessageLabelDelegate: class {
-    func labelDidSelectedLinkText(label: MessageLabel, text: String)
+    func labelDidSelectedLinkText(label: MessageLabel, text: String, type: LinkType)
 }
 
-class MessageLabel: UILabel {
+enum LinkType {
+    case email
+    case phone
+    case url
+}
 
-    private let patterns = ["((http[s]{0,1}|ftp)://[a-zA-Z0-9\\.\\-]+\\.([a-zA-Z]{2,4})(:\\d+)?(/[a-zA-Z0-9\\.\\-~!@#$%^&*+?:_/=<>]*)?)|(www.[a-zA-Z0-9\\.\\-]+\\.([a-zA-Z]{2,4})(:\\d+)?(/[a-zA-Z0-9\\.\\-~!@#$%^&*+?:_/=<>]*)?)" , "@[\\u4e00-\\u9fa5a-zA-Z0-9_-]*"]
+let regexEmail = try? NSRegularExpression(pattern: "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}", options: NSRegularExpression.Options(rawValue: 0))
+let regexPhone = try? NSRegularExpression(pattern: "^[1-9][0-9]{4,11}$", options: NSRegularExpression.Options(rawValue: 0))
+let regexUrl = try? NSRegularExpression(pattern: "((http[s]{0,1}|ftp)://[a-zA-Z0-9\\.\\-]+\\.([a-zA-Z]{2,4})(:\\d+)?(/[a-zA-Z0-9\\.\\-~!@#$%^&*+?:_/=<>]*)?)|(www.[a-zA-Z0-9\\.\\-]+\\.([a-zA-Z]{2,4})(:\\d+)?(/[a-zA-Z0-9\\.\\-~!@#$%^&*+?:_/=<>]*)?)", options: NSRegularExpression.Options(rawValue: 0))
 
-    private lazy var linkRanges = [NSRange]()
-    private lazy var tempAttributedString = NSMutableAttributedString()
-    private lazy var layoutManager = NSLayoutManager()
-    private lazy var textContainer = NSTextContainer()
-
-    var linkTextColor = UIColor.blue
-    var selectedBackgroudColor = UIColor.lightGray
-
-    private var selectedRange: NSRange?
-
+class MessageLabel: YYLabel {
+    
     weak var delegate: MessageLabelDelegate?
 
     override public init(frame: CGRect) {
@@ -30,158 +29,104 @@ class MessageLabel: UILabel {
         prepareLabel()
     }
     
-    public func update() {
-        updateAttributedString()
-    }
-    
-    private func updateAttributedString() {
-        if attributedText == nil {
-            attributedText = NSAttributedString(string: text ?? "")
-        }
-        let attrStringM = addLineBreak(attributedText!)
-        regexLinkRanges(attrStringM)
-        addLinkAttribute(attrStringM)
-        tempAttributedString = NSMutableAttributedString(attributedString: attrStringM)
-        attributedText = tempAttributedString
-    }
-    
-    private func addLinkAttribute(_ attrStringM: NSMutableAttributedString) {
-        guard attrStringM.length != 0 else {
-            return
-        }
-        var range = NSRange(location: 0, length: 0)
-        var attributes = attrStringM.attributes(at: 0, effectiveRange: &range)
-        attributes[NSAttributedStringKey.font] = font
-        attributes[NSAttributedStringKey.foregroundColor] = textColor
-        attrStringM.addAttributes(attributes, range: range)
-        attributes[NSAttributedStringKey.foregroundColor] = linkTextColor
-        for r in linkRanges {
-            attrStringM.setAttributes(attributes, range: r)
-        }
-    }
-    
-    private func regexLinkRanges(_ attrString: NSAttributedString) {
-        linkRanges.removeAll()
-        let regexRange = NSRange(location: 0, length: attrString.string.count)
-        for pattern in patterns {
-            guard let regex = try? NSRegularExpression(pattern: pattern, options: NSRegularExpression.Options.dotMatchesLineSeparators) else{
-                continue
-            }
-            let results = regex.matches(in: attrString.string, options: NSRegularExpression.MatchingOptions(rawValue: 0), range: regexRange)
-            for r in results {
-                linkRanges.append(r.range(at: 0))
-            }
-        }
-    }
-    
-    private func addLineBreak(_ attrString: NSAttributedString) -> NSMutableAttributedString {
-        let attrStringM = NSMutableAttributedString(attributedString: attrString)
-        if attrStringM.length == 0 {
-            return attrStringM
-        }
-        var range = NSRange(location: 0, length: 0)
-        var attributes = attrStringM.attributes(at: 0, effectiveRange: &range)
-
-        if let paragraphStyle = attributes[NSAttributedStringKey.paragraphStyle] as? NSMutableParagraphStyle {
-            paragraphStyle.lineBreakMode = .byWordWrapping
-        } else {
-            let paragraphStyleM = NSMutableParagraphStyle()
-            paragraphStyleM.lineBreakMode = .byWordWrapping
-            attributes[NSAttributedStringKey.paragraphStyle] = paragraphStyleM
-            attrStringM.setAttributes(attributes, range: range)
-        }
-        return attrStringM
-    }
-    
-    private func glyphsRange() -> NSRange {
-        return NSRange(location: 0, length: tempAttributedString.length)
-    }
-    
-    private func glyphsOffset(_ range: NSRange) -> CGPoint {
-        let rect = layoutManager.boundingRect(forGlyphRange: range, in: textContainer)
-        let height = (bounds.height - rect.height) * 0.5
-        return CGPoint(x: 0, y: height)
-    }
-    
-    public override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        super.touchesBegan(touches, with: event)
-        guard let location = touches.first?.location(in: self) else {
-            return
-        }
-        selectedRange = linkRangeAtLocation(location)
-        modifySelectedAttribute(true)
-    }
-    
-    public override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        super.touchesMoved(touches, with: event)
-        guard let location = touches.first?.location(in: self) else {
-            return
-        }
-        if let range = linkRangeAtLocation(location) {
-            if !(range.location == selectedRange?.location && range.length == selectedRange?.length) {
-                modifySelectedAttribute(false)
-                selectedRange = range
-                modifySelectedAttribute(true)
-            }
-        } else {
-            modifySelectedAttribute(false)
-        }
-    }
-    
-    public override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        super.touchesEnded(touches, with: event)
-        guard let range = selectedRange else {
-            return
-        }
-        let text = (tempAttributedString.string as NSString).substring(with: range)
-        delegate?.labelDidSelectedLinkText(label: self, text: text)
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.25) {
-            self.modifySelectedAttribute(false)
-        }
-    }
-    
-    public override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
-        super.touchesCancelled(touches, with: event)
-        modifySelectedAttribute(false)
-    }
-    
-    private func modifySelectedAttribute(_ isSet: Bool) {
-        guard let range = selectedRange else {
-            return
-        }
-        var attributes = tempAttributedString.attributes(at: 0, effectiveRange: nil)
-        attributes[NSAttributedStringKey.foregroundColor] = linkTextColor
-        attributes[NSAttributedStringKey.backgroundColor] = isSet ? selectedBackgroudColor : UIColor.clear
-        tempAttributedString.addAttributes(attributes, range: range)
-        selectedRange = isSet ? selectedRange : nil
-        attributedText = tempAttributedString
-    }
-    
-    private func linkRangeAtLocation(_ location: CGPoint) -> NSRange? {
-        guard tempAttributedString.length != 0 else {
-            return nil
-        }
-
-        let offset = glyphsOffset(glyphsRange())
-        let point = CGPoint(x: offset.x + location.x, y: offset.y + location.y)
-        let index = layoutManager.glyphIndex(for: point, in: textContainer)
-        for r in linkRanges {
-            if  NSLocationInRange(index, r) { //index >= r.location && index <= r.location + r.length
-                return r
-            }
-        }
-        return nil
-    }
-
-    public override func layoutSubviews() {
-        super.layoutSubviews()
-        textContainer.size = bounds.size
-    }
-    
     private func prepareLabel() {
-        layoutManager.addTextContainer(textContainer)
-        textContainer.lineFragmentPadding = 0
-        textContainer.lineBreakMode = lineBreakMode
+        numberOfLines = 0
+        displaysAsynchronously = true
+        backgroundColor = UIColor.clear
         isUserInteractionEnabled = true
+        
+        highlightTapAction = { [weak self] (containerView , text , range , rect) in
+            guard let weakSelf = self else {
+                return
+            }
+            let highlight : YYTextHighlight = text.yy_attribute(YYTextHighlightAttributeName, at: UInt(range.location)) as! YYTextHighlight
+            if let info = highlight.userInfo {
+                let linkValue : String = info["linkValue"] as! String
+                let linkType : LinkType = info["linkType"] as! LinkType
+                weakSelf.delegate?.labelDidSelectedLinkText(label: weakSelf, text: linkValue, type: linkType)
+            }
+        }
+    }
+    
+    public func textSize(text: NSAttributedString , size: CGSize) -> CGSize {
+        let container = YYTextContainer(size: size)
+        let layout = YYTextLayout(container: container, text: text)
+        return layout!.textBoundingSize
+    }
+    
+    public func textHandle(text: NSMutableAttributedString) {
+        let highlightBorder = YYTextBorder()
+        highlightBorder.insets = UIEdgeInsetsMake(0, 0, 0, 0)
+        highlightBorder.cornerRadius = 5.0
+        highlightBorder.fillColor = UIColor(white: 0.8, alpha: 0.5)
+        
+        // email
+        if let resultEmail = regexEmail?.matches(in: text.string, options: NSRegularExpression.MatchingOptions.init(rawValue: 0), range: text.yy_rangeOfAll()) {
+            
+            for at: NSTextCheckingResult in resultEmail {
+                
+                if at.range.location == NSNotFound && at.range.length <= 1 {
+                    continue
+                }
+                
+                if text.yy_attribute(YYTextHighlightAttributeName, at: UInt(at.range.location)) == nil {
+                    
+                    let highlight = YYTextHighlight()
+                    highlight.setBackgroundBorder(highlightBorder)
+                    highlight.userInfo = [
+                        "linkValue" : NSString.init(string: text.string).substring(with: at.range),
+                        "linkType" : LinkType.email
+                    ]
+                    text.yy_setTextHighlight(highlight, range: at.range)
+                    text.yy_setColor(UIColor.blue, range: at.range)
+                }
+            }
+        }
+        
+        // phone
+        if let resultPhone = regexPhone?.matches(in: text.string, options: NSRegularExpression.MatchingOptions.init(rawValue: 0), range: text.yy_rangeOfAll()) {
+            
+            for at: NSTextCheckingResult in resultPhone {
+                
+                if at.range.location == NSNotFound && at.range.length <= 1 {
+                    continue
+                }
+                
+                if text.yy_attribute(YYTextHighlightAttributeName, at: UInt(at.range.location)) == nil {
+                    
+                    let highlight = YYTextHighlight()
+                    highlight.setBackgroundBorder(highlightBorder)
+                    highlight.userInfo = [
+                        "linkValue" : NSString.init(string: text.string).substring(with: at.range),
+                        "linkType" : LinkType.phone
+                    ]
+                    text.yy_setTextHighlight(highlight, range: at.range)
+                    text.yy_setColor(UIColor.blue, range: at.range)
+                }
+            }
+        }
+        
+        // url
+        if let resultUrl = regexUrl?.matches(in: text.string, options: NSRegularExpression.MatchingOptions.init(rawValue: 0), range: text.yy_rangeOfAll()) {
+            
+            for at: NSTextCheckingResult in resultUrl {
+                
+                if at.range.location == NSNotFound && at.range.length <= 1 {
+                    continue
+                }
+                
+                if text.yy_attribute(YYTextHighlightAttributeName, at: UInt(at.range.location)) == nil {
+                    
+                    let highlight = YYTextHighlight()
+                    highlight.setBackgroundBorder(highlightBorder)
+                    highlight.userInfo = [
+                        "linkValue" : NSString.init(string: text.string).substring(with: at.range),
+                        "linkType" : LinkType.url
+                    ]
+                    text.yy_setTextHighlight(highlight, range: at.range)
+                    text.yy_setColor(UIColor.blue, range: at.range)
+                }
+            }
+        }
     }
 }

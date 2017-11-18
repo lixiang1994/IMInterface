@@ -85,8 +85,4 @@ class ChatCell: UITableViewCell {
         }
         timeLabel.attributedText = time
     }
-    
-    public func cellHeight() -> CGFloat {
-        return systemLayoutSizeFitting(CGSize(width: UIScreen.main.bounds.width, height: CGFloat(MAXFLOAT))).height
-    }
 }
