@@ -20,6 +20,8 @@ PODS:
   - SQLCipher/standard (3.4.1):
     - SQLCipher/common
   - TZImagePickerController (1.9.4)
+  - UITableView+FDTemplateLayoutCell (1.6)
+  - YYText (1.0.7)
 
 DEPENDENCIES:
   - Alamofire
@@ -29,6 +31,8 @@ DEPENDENCIES:
   - PINRemoteImage
   - SnapKit (~> 4.0.0)
   - TZImagePickerController
+  - UITableView+FDTemplateLayoutCell
+  - YYText
 
 SPEC CHECKSUMS:
   Alamofire: 2d95912bf4c34f164fdfc335872e8c312acaea4a
@@ -41,7 +45,9 @@ SPEC CHECKSUMS:
   SnapKit: a42d492c16e80209130a3379f73596c3454b7694
   SQLCipher: 43d12c0eb9c57fb438749618fc3ce0065509a559
   TZImagePickerController: 3f5383c7eae8ab9971a94690c2af6a3a72520319
+  UITableView+FDTemplateLayoutCell: 5c949b4a5059c404b442926c0e80f81d10a2d66f
+  YYText: 5c461d709e24d55a182d1441c41dc639a18a4849
 
-PODFILE CHECKSUM: 0ee5710c7e150ba266a13fa2b0adbb86d0cdaa50
+PODFILE CHECKSUM: 6ac142100efe296290d7e866c9e07f7cb5f4c29f
 
 COCOAPODS: 1.4.0.beta.2

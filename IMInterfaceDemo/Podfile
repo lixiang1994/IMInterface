@@ -13,5 +13,7 @@ target 'IMInterfaceDemo' do
   pod 'GDPerformanceView-Swift'
   pod 'PINRemoteImage'
   pod 'TZImagePickerController'
+  pod 'YYText'
+  pod 'UITableView+FDTemplateLayoutCell'
   
 end

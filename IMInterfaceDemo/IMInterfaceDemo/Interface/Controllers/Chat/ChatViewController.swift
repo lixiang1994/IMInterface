@@ -2,6 +2,7 @@ import UIKit
 import PINCache
 import PINRemoteImage
 import TZImagePickerController
+import UITableView_FDTemplateLayoutCell
 
 class ChatViewController: UIViewController {
 
@@ -220,47 +221,12 @@ extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
         UIMenuController.shared.setMenuVisible(false, animated: false)
     }
     
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        currentContentOffsetY = tableView.contentOffset.y
-        UIMenuController.shared.setMenuVisible(false, animated: false)
-    }
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return groupSort.count
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let array = groupInfo[groupSort[section]] else {
-            return 0
-        }
-        return array.count
-    }
-
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func renderCell(_ cell: ChatCell, indexPath: IndexPath) {
         UIView.setAnimationsEnabled(false)
         let array = groupInfo[groupSort[indexPath.section]] ?? []
         let message: MessageItem = array[indexPath.row]
-        let isMe = message.userId == currentUserId
-        let cellIdentifier: String?
-        switch message.type {
-        case .text:
-            cellIdentifier = isMe ? textMeCellIdentifier : textCellIdentifier
-        case .photo:
-            cellIdentifier = isMe ? photoMeCellIdentifier : photoCellIdentifier
-        case .video:
-            cellIdentifier = ""
-        case .sticker:
-            cellIdentifier = ""
-        case .card_contact:
-            cellIdentifier = ""
-        case .card_group:
-            cellIdentifier = ""
-        case .card_transfer:
-            cellIdentifier = ""
-        }
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier!) as! ChatCell
-        cell.delegate = self
         cell.render(item: message)
+        
         if indexPath.row < array.count - 1 {
             let nextMessage = array[indexPath.row + 1]
             let isEqual = message.userId == nextMessage.userId
@@ -276,6 +242,55 @@ extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
             cell.continuity(false)
         }
         UIView.setAnimationsEnabled(true)
+    }
+    
+    func getIdentifier(_ indexPath: IndexPath) -> String {
+        let array = groupInfo[groupSort[indexPath.section]] ?? []
+        let message: MessageItem = array[indexPath.row]
+        let isMe = message.userId == currentUserId
+        switch message.type {
+        case .text:
+            return isMe ? textMeCellIdentifier : textCellIdentifier
+        case .photo:
+            return isMe ? photoMeCellIdentifier : photoCellIdentifier
+        case .audio:
+            return ""
+        case .video:
+            return ""
+        case .sticker:
+            return ""
+        }
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        currentContentOffsetY = tableView.contentOffset.y
+        UIMenuController.shared.setMenuVisible(false, animated: false)
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return groupSort.count
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        guard let array = groupInfo[groupSort[section]] else {
+            return 0
+        }
+        return array.count
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        let identifier = getIdentifier(indexPath)
+        return tableView.fd_heightForCell(withIdentifier: identifier, cacheBy: indexPath, configuration: { (tempCell) in
+            let cell: ChatCell = tempCell as! ChatCell
+            self.renderCell(cell, indexPath: indexPath)
+        })
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let identifier = getIdentifier(indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: identifier) as! ChatCell
+        cell.delegate = self
+        renderCell(cell, indexPath: indexPath)
         return cell
     }
     

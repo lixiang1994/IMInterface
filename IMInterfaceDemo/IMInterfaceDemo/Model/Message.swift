@@ -23,9 +23,7 @@ enum MessageStatus: String, Codable {
 enum MessageType: String, Codable {
     case text
     case photo
+    case audio
     case video
     case sticker
-    case card_contact
-    case card_group
-    case card_transfer
 }
