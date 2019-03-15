@@ -578,8 +578,9 @@ extension ChatViewController {
     
     func showOrHideKeyboard(_ beginKeyboardRect: CGRect, _ endKeyboardRect: CGRect) {
         let bounds = UIScreen.main.bounds
-        
-        if endKeyboardRect.origin.y == bounds.height || endKeyboardRect.origin.y == bounds.width {
+        let offset = endKeyboardRect.origin.y.rounded()
+        let hide = offset == bounds.height || offset == bounds.width
+        if hide {
             bottomConstraint.constant = 0
             isShowedKeyboard = false
             let tableViewHeight = view.bounds.height - beginKeyboardRect.height - textViewHeightConstraint.constant
