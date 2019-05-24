@@ -104,7 +104,7 @@ class ChatPhotoCell: ChatCell {
         } else {
             image = nil
         }
-        configTime(item.createdAt, image?.withRenderingMode(UIImageRenderingMode.alwaysTemplate))
+        configTime(item.createdAt, image?.withRenderingMode(UIImage.RenderingMode.alwaysTemplate))
     }
     
     override func continuity(_ result: Bool) {

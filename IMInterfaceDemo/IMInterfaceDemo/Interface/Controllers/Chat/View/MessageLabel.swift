@@ -56,7 +56,7 @@ class MessageLabel: YYLabel {
     
     public func textHandle(text: NSMutableAttributedString) {
         let highlightBorder = YYTextBorder()
-        highlightBorder.insets = UIEdgeInsetsMake(0, 0, 0, 0)
+        highlightBorder.insets = UIEdgeInsets.init(top: 0, left: 0, bottom: 0, right: 0)
         highlightBorder.cornerRadius = 5.0
         highlightBorder.fillColor = UIColor(white: 0.8, alpha: 0.5)
         

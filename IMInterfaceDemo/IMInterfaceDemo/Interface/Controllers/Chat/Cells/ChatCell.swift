@@ -28,7 +28,7 @@ class ChatCell: UITableViewCell {
         long.minimumPressDuration =  0.8
         addGestureRecognizer(long)
         
-        NotificationCenter.default.addObserver(self, selector: #selector(willHideMenu(_:)), name: NSNotification.Name.UIMenuControllerWillHideMenu, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(willHideMenu(_:)), name: UIMenuController.willHideMenuNotification, object: nil)
     }
 
     deinit {
@@ -49,7 +49,7 @@ class ChatCell: UITableViewCell {
     }
 
     @objc func longPressAction(_ recognizer: UILongPressGestureRecognizer) {
-        guard recognizer.state == UIGestureRecognizerState.began, let delegate = delegate, let item = model else {
+        guard recognizer.state == UIGestureRecognizer.State.began, let delegate = delegate, let item = model else {
             return
         }
 
@@ -73,7 +73,7 @@ class ChatCell: UITableViewCell {
         let formatter = DateFormatter(dateFormat: "hh:mm a")
         formatter.locale = Locale(identifier: "en_US")
         let timeString = formatter.string(from: date)
-        let time = NSMutableAttributedString(string: timeString, attributes: [NSAttributedStringKey.font : timeLabel.font , NSAttributedStringKey.foregroundColor : timeLabel.textColor])
+        let time = NSMutableAttributedString(string: timeString, attributes: [NSAttributedString.Key.font : timeLabel.font , NSAttributedString.Key.foregroundColor : timeLabel.textColor])
         if let image = image {
             let size = image.size
             let ratio = size.width / size.height

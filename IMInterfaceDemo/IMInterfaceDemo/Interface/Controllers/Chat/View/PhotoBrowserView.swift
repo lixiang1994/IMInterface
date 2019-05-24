@@ -40,7 +40,7 @@ class PhotoBrowserView: UIView {
         browserImageView.layer.shadowOffset = CGSize(width: 0.0, height: 0.0)
         browserImageView.layer.shadowRadius = 4.0
         browserImageView.layer.shadowOpacity = 0.6
-        browserImageView.contentMode = UIViewContentMode.scaleAspectFill
+        browserImageView.contentMode = UIView.ContentMode.scaleAspectFill
         browserImageView.frame = imageRect
         browserScrollView.addSubview(browserImageView)
         

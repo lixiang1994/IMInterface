@@ -20,10 +20,10 @@ extension UIApplication {
 extension UIApplication {
 
     public static func openAppSettings() {
-        guard let settingsURL = URL(string: UIApplicationOpenSettingsURLString) else {
+        guard let settingsURL = URL(string: UIApplication.openSettingsURLString) else {
             return
         }
-        UIApplication.shared.open(settingsURL, options: [:], completionHandler: nil)
+        UIApplication.shared.open(settingsURL, options: convertToUIApplicationOpenExternalURLOptionsKeyDictionary([:]), completionHandler: nil)
     }
 
     public func canOpenURL(string: String) -> Bool {
@@ -37,7 +37,7 @@ extension UIApplication {
         guard let url = URL(string: string) else {
             return
         }
-        UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        UIApplication.shared.open(url, options: convertToUIApplicationOpenExternalURLOptionsKeyDictionary([:]), completionHandler: nil)
     }
 
     public func tryOpenURL(_ URLString: String, options: [String: AnyObject] = [:], completionHandler completion: ((Bool) -> Void)? = nil) {
@@ -49,7 +49,7 @@ extension UIApplication {
             return
         }
 
-        UIApplication.shared.open(url, options: options, completionHandler: completion)
+        UIApplication.shared.open(url, options: convertToUIApplicationOpenExternalURLOptionsKeyDictionary(options), completionHandler: completion)
     }
 }
 
@@ -81,4 +81,9 @@ extension UIApplication {
             }
         })
     }
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertToUIApplicationOpenExternalURLOptionsKeyDictionary(_ input: [String: Any]) -> [UIApplication.OpenExternalURLOptionsKey: Any] {
+	return Dictionary(uniqueKeysWithValues: input.map { key, value in (UIApplication.OpenExternalURLOptionsKey(rawValue: key), value)})
 }

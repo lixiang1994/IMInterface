@@ -10,9 +10,9 @@ extension UIImage {
         
         let usePNG = hasAlpha
         if usePNG {
-            return UIImagePNGRepresentation(self)!
+            return self.pngData()!
         } else {
-            return UIImageJPEGRepresentation(self, 1.0)!
+            return self.jpegData(compressionQuality: 1.0)!
         }
     }
 }

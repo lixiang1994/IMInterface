@@ -38,8 +38,8 @@ class ChatViewController: UIViewController {
         isDidAppear = true
     }
     
-    override func willMove(toParentViewController parent: UIViewController?) {
-        super.willMove(toParentViewController: parent)
+    override func willMove(toParent parent: UIViewController?) {
+        super.willMove(toParent: parent)
         isDidAppear = false
     }
     
@@ -49,7 +49,7 @@ class ChatViewController: UIViewController {
         prepareTextView()
         fetchData()
         
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChangeFrame(_:)), name: NSNotification.Name.UIKeyboardWillChangeFrame, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChangeFrame(_:)), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(messageDidChange(_:)), name: NSNotification.Name.MessageDidChange, object: nil)
     }
     
@@ -108,7 +108,7 @@ class ChatViewController: UIViewController {
         }
         
         let indexPath = IndexPath(row: array.count - 1, section: groupSort.count - 1)
-        tableView.scrollToRow(at: indexPath, at: UITableViewScrollPosition.bottom, animated: animated)
+        tableView.scrollToRow(at: indexPath, at: UITableView.ScrollPosition.bottom, animated: animated)
     }
     
     @IBAction func transferAction(_ sender: Any) {
@@ -156,7 +156,7 @@ class ChatViewController: UIViewController {
         formatter.dateFormat = "yyyyMMdd"
         formatter.locale = Locale.current
         let key = formatter.string(from: message.createdAt)
-        if let section = groupSort.index(where: { (item) -> Bool in return item == key }) {
+        if let section = groupSort.firstIndex(where: { (item) -> Bool in return item == key }) {
             var array = groupInfo[key] ?? []
             if let lastMessage = array.last, lastMessage.userId == message.userId {
                 let row = array.count - 1
@@ -208,7 +208,7 @@ extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
         tableView.dataSource = self
         tableView.delegate = self
         tableView.tableFooterView = UIView()
-        tableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0)
+        tableView.contentInset = UIEdgeInsets.init(top: 0, left: 0, bottom: 0, right: 0)
         let tap = UITapGestureRecognizer(target: self, action: #selector(tapTableView(recognizer:)))
         tap.cancelsTouchesInView = false
         tableView.addGestureRecognizer(tap)
@@ -316,7 +316,7 @@ extension ChatViewController: ChatCellDelegate {
     func longPressMenu(cell: ChatCell, item: MessageItem, rect: CGRect) {
         if textView.isFirstResponder {
             textView.overrideNext = self
-            NotificationCenter.default.addObserver(self, selector: #selector(willHideMenu(_:)), name: NSNotification.Name.UIMenuControllerWillHideMenu, object: nil)
+            NotificationCenter.default.addObserver(self, selector: #selector(willHideMenu(_:)), name: UIMenuController.willHideMenuNotification, object: nil)
         } else {
             becomeFirstResponder()
         }
@@ -334,7 +334,7 @@ extension ChatViewController: ChatCellDelegate {
         selectedMessage = nil
         textView.overrideNext = nil
         UIMenuController.shared.menuItems = nil
-        NotificationCenter.default.removeObserver(self, name: Notification.Name.UIMenuControllerWillHideMenu, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIMenuController.willHideMenuNotification, object: nil)
     }
     
     override var canBecomeFirstResponder: Bool {
@@ -380,7 +380,7 @@ extension ChatViewController: UITextViewDelegate {
         textView.layer.cornerRadius = textViewHeightConstraint.constant / 2
         textView.isScrollEnabled = false
         textView.font = UIFont.systemFont(ofSize: 16.0)
-        textView.textContainerInset = UIEdgeInsetsMake(7, 8, 7, 8)
+        textView.textContainerInset = UIEdgeInsets.init(top: 7, left: 8, bottom: 7, right: 8)
     }
     
     func clearTextView() {
@@ -496,7 +496,7 @@ extension ChatViewController : UIImagePickerControllerDelegate, UINavigationCont
         if UIImagePickerController.isSourceTypeAvailable(.camera){
             let picker = UIImagePickerController()
             picker.delegate = self
-            picker.sourceType = UIImagePickerControllerSourceType.camera
+            picker.sourceType = UIImagePickerController.SourceType.camera
             self.present(picker, animated: true, completion: nil)
         }
     }
@@ -516,8 +516,11 @@ extension ChatViewController : UIImagePickerControllerDelegate, UINavigationCont
         picker.dismiss(animated: true, completion: nil)
     }
     
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+// Local variable inserted by Swift 4.2 migrator.
+let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
+
+        if let image = info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.originalImage)] as? UIImage {
             sendPhoto(image)
         }
         picker.dismiss(animated: true, completion: nil)
@@ -558,13 +561,13 @@ extension ChatViewController {
         guard let info = sender.userInfo else {
             return
         }
-        guard let duration = (info[UIKeyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue else {
+        guard let duration = (info[UIResponder.keyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue else {
             return
         }
-        guard let beginKeyboardRect = (info[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue else {
+        guard let beginKeyboardRect = (info[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue else {
             return
         }
-        guard let endKeyboardRect = (info[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else {
+        guard let endKeyboardRect = (info[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else {
             return
         }
         guard isDidAppear else {
@@ -614,4 +617,14 @@ extension ChatViewController {
         self.view.layoutIfNeeded()
     }
 
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromUIImagePickerControllerInfoKeyDictionary(_ input: [UIImagePickerController.InfoKey: Any]) -> [String: Any] {
+	return Dictionary(uniqueKeysWithValues: input.map {key, value in (key.rawValue, value)})
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromUIImagePickerControllerInfoKey(_ input: UIImagePickerController.InfoKey) -> String {
+	return input.rawValue
 }

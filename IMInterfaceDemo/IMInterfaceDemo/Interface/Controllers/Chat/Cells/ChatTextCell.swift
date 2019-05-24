@@ -17,11 +17,11 @@ class ChatTextCell: ChatCell {
     override func render(item: MessageItem) {
         model = item
         let font = UIFont.systemFont(ofSize: 16)
-        let attributes = [NSAttributedStringKey.font : font]
+        let attributes = [NSAttributedString.Key.font : font]
         let content = NSMutableAttributedString(string: item.content, attributes: attributes)
         let placeLayer = CALayer()
         placeLayer.frame = CGRect(x: 0, y: 0, width: item.userId == currentUserId ? 80 : 60, height: font.pointSize)
-        let attach = NSMutableAttributedString.yy_attachmentString(withContent: placeLayer, contentMode: UIViewContentMode.bottomRight, attachmentSize: placeLayer.frame.size, alignTo: font, alignment: YYTextVerticalAlignment.center)
+        let attach = NSMutableAttributedString.yy_attachmentString(withContent: placeLayer, contentMode: UIView.ContentMode.bottomRight, attachmentSize: placeLayer.frame.size, alignTo: font, alignment: YYTextVerticalAlignment.center)
         content.append(attach)
         contentLabel.textHandle(text: content)
         contentLabel.attributedText = content
